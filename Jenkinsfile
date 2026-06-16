@@ -48,7 +48,7 @@ pipeline {
         stage('Create Artifact') {
             steps {
                 sh '''
-                zip -r website.zip .
+                zip -r website.zip index.html
                 '''
             }
         }
