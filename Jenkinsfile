@@ -8,10 +8,6 @@ pipeline {
         SONAR_PROJECT_KEY = "cicd-demo"
     }
 
-    tools {
-        sonarQubeScanner 'SonarScanner'
-    }
-
     stages {
 
         stage('Checkout') {
@@ -22,15 +18,21 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
 
-                    sh """
-                    sonar-scanner \
-                    -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=$SONAR_HOST_URL \
-                    -Dsonar.token=$SONAR_AUTH_TOKEN
-                    """
+                script {
+
+                    def scannerHome = tool 'SonarScanner'
+
+                    withSonarQubeEnv('SonarQube') {
+
+                        sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=$SONAR_HOST_URL \
+                        -Dsonar.token=$SONAR_AUTH_TOKEN
+                        """
+                    }
                 }
             }
         }
@@ -45,16 +47,13 @@ pipeline {
 
         stage('Create Artifact') {
             steps {
-
                 sh '''
                 zip -r website.zip .
                 '''
-
             }
         }
 
         stage('Upload Artifact To S3') {
-
             steps {
 
                 withCredentials([
@@ -63,8 +62,7 @@ pipeline {
                 ]) {
 
                     sh '''
-                    aws s3 cp website.zip \
-                    s3://$S3_BUCKET/website.zip
+                    aws s3 cp website.zip s3://$S3_BUCKET/website.zip
                     '''
                 }
             }
@@ -116,9 +114,7 @@ pipeline {
                     echo "HTTP STATUS CODE = ${statusCode}"
 
                     if (statusCode != "200") {
-
                         error("Deployment Validation Failed")
-
                     }
                 }
             }
@@ -128,11 +124,11 @@ pipeline {
     post {
 
         success {
-            echo "Deployment Successful"
+            echo 'Deployment Successful'
         }
 
         failure {
-            echo "Deployment Failed"
+            echo 'Deployment Failed'
         }
     }
 }
