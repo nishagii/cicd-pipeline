@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hi SRE. This is to inform you CI/CD Pipeline Success</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#0f172a;
+        color:white;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+    }
+
+    .container{
+        text-align:center;
+        max-width:900px;
+        padding:40px;
+    }
+
+    h1{
+        font-size:3rem;
+        margin-bottom:20px;
+        color:#22c55e;
+    }
+
+    h2{
+        margin-bottom:20px;
+        color:#cbd5e1;
+    }
+
+    .status{
+        display:inline-block;
+        background:#22c55e;
+        color:#000;
+        padding:12px 24px;
+        border-radius:30px;
+        font-weight:bold;
+        margin:20px 0;
+    }
+
+    .pipeline{
+        margin-top:40px;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:15px;
+    }
+
+    .step{
+        background:#1e293b;
+        padding:15px 20px;
+        border-radius:10px;
+        border:1px solid #334155;
+    }
+
+    footer{
+        margin-top:40px;
+        color:#94a3b8;
+        font-size:14px;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🚀 Deployment Successful</h1>
+
+    <h2>CI/CD Pipeline Executed Successfully</h2>
+
+    <div class="status">
+        HTTP 200 OK
+    </div>
+
+    <div class="pipeline">
+
+        <div class="step">GitHub</div>
+        <div class="step">Jenkins</div>
+        <div class="step">SonarQube</div>
+        <div class="step">Quality Gate</div>
+        <div class="step">S3 Upload</div>
+        <div class="step">Apache Deploy</div>
+        <div class="step">Validation</div>
+
+    </div>
+
+    <footer>
+        <p><strong>Project:</strong> CI/CD Automation Assignment</p>
+        <p><strong>Engineer:</strong> Nishagee Jeewantha</p>
+        <p><strong>Stack:</strong> Jenkins • Docker • SonarQube • GitHub • AWS S3 • Apache</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
